@@ -30,6 +30,12 @@ function testRule(
     },
     { code: `<Item prop={${ruleCode}} />`, line: 1, column: 13 },
     { code: `<Item.tag prop={${ruleCode}} />`, line: 1, column: 17 },
+    {
+      code: `<Item prop={${ruleCode}} />`,
+      options: [{ allowComponents: ["OtherItem"] }],
+      line: 1,
+      column: 13,
+    },
     { code: `<Item prop={${ruleCode} || true} />`, line: 1, column: 13 },
     { code: `<Item prop={false || ${ruleCode}} />`, line: 1, column: 22 },
     { code: `<Item prop={false ? foo : ${ruleCode}} />`, line: 1, column: 27 },
@@ -89,6 +95,14 @@ function testRule(
     {
       code: `<div style={${ruleCode}} />`,
       options: [{ nativeAllowList: ["style"] }],
+    },
+    {
+      code: `<Item prop={${ruleCode}} />`,
+      options: [{ allowComponents: ["Item"] }],
+    },
+    {
+      code: `<Layout.Item prop={${ruleCode}} />`,
+      options: [{ allowComponents: ["Layout.Item"] }],
     },
     { code: "<Item prop={0} />" },
     { code: "var a;<Item prop={a} />" },

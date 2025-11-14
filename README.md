@@ -25,7 +25,10 @@ Add `plugins` section and specify eslint-plugin-react-perf as a plugin.
 
 # Configuration
 
-As of v3.3.0, each eslint-plugin-react-perf rule supports configuration to control whether native elements (lower case first letter React components) are ignored.
+Each eslint-plugin-react-perf rule supports options for ignoring certain elements:
+
+- `nativeAllowList`: Control whether native elements (lowercase first letter React components) are ignored. Accepts `"all"` or an array of attribute names (case-insensitive) to ignore on native elements.
+- `allowComponents`: Provide an array of component names to ignore entirely. Use the fully qualified component name for member expressions (for example, `"Layout.Item"`).
 
 With this configuration, all native elements are ignored for this rule:
 
@@ -48,6 +51,19 @@ With this configuration, the "style" attribute is ignored for native elements fo
     "error",
     {
       "nativeAllowList": ["style"]
+    }
+  ]
+}
+```
+
+With this configuration, `CustomButton` and `Layout.Item` components are ignored for this rule:
+
+```json
+{
+  "react-perf/jsx-no-new-object-as-prop": [
+    "error",
+    {
+      "allowComponents": ["CustomButton", "Layout.Item"]
     }
   ]
 }
